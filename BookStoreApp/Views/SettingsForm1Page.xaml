@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookStoreApp.Views.SettingsForm1Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:viewModels="clr-namespace:BookStoreApp.ViewModels;assembly=BookStoreApp"
+    x:DataType="viewModels:SettingsForm1ViewModel"
+    BackgroundColor="{dx:ThemeColor Key=SurfaceContainer}"
+    Shell.BackgroundColor="{dx:ThemeColor Key=SurfaceContainer}"
+    Title="">
+
+    <ContentPage.BindingContext>
+        <viewModels:SettingsForm1ViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style x:Key="HeaderText" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Roboto Medium" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{dx:ThemeColor Key=OnSurface}" />
+        </Style>
+        <Style x:Key="FormComponent" TargetType="dx:FormItem">
+            <Setter Property="Padding" Value="0,16" />
+            <Setter Property="ArrowMargin" Value="16,0" />
+            <Setter Property="ShowSeparator" Value="False" />
+            <Setter Property="ImageWidth" Value="24" />
+            <Setter Property="ImageHeight" Value="24" />
+            <Setter Property="ImageMargin" Value="16,0" />
+            <Setter Property="ImageColor" Value="{dx:ThemeColor Key=OnSurfaceVariant}" />
+            <Setter Property="HorizontalSpacing" Value="0" />
+            <Setter Property="VerticalSpacing" Value="10" />
+            <Setter Property="TextFontSize" Value="16" />
+            <Setter Property="TextFontFamily" Value="Roboto" />
+            <Setter Property="ShowArrow" Value="True" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Behaviors>
+        <dx:SystemBarBehavior AndroidStatusBarBackground="{dx:ThemeColor Key=SurfaceContainer}" />
+    </ContentPage.Behaviors>
+
+    <dx:DXScrollView>
+        <Grid RowDefinitions="Auto,*">
+            <Label
+                Grid.Row="0"
+                Text="Settings"
+                FontSize="24"
+                FontAttributes="Bold"
+                FontFamily="Roboto Medium"
+                TextColor="{dx:ThemeColor Key=OnSurface}"
+                Margin="16,4,16,24" />
+
+            <dx:DXStackLayout Grid.Row="1" BackgroundColor="{dx:ThemeColor Key=Surface}">
+                <Label
+                    Style="{StaticResource HeaderText}"
+                    Text="Account &amp; Profile"
+                    Margin="16,16,16,8" />
+                <dx:FormItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="user"
+                    TapCommand="{Binding HandleActionCommand}"
+                    Text="Your Account" />
+                <dx:FormItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="location"
+                    TapCommand="{Binding HandleActionCommand}"
+                    Text="Contact information" />
+                <dx:FormItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="payment"
+                    TapCommand="{Binding HandleActionCommand}"
+                    Text="Payment methods" />
+               
+                <Label
+                    Style="{StaticResource HeaderText}"
+                    Text="App Preferences"
+                    Margin="16,24,16,8" />
+                 <dx:FormItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="settings"
+                    TapCommand="{Binding HandleActionCommand}"
+                    Text="Appearance" />
+                <dx:FormItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="notifications"
+                    TapCommand="{Binding HandleActionCommand}"
+                    Text="Notifications" />
+                <dx:FormListPickerItem
+                    Style="{StaticResource FormComponent}"
+                    ItemsSource="{Binding Languages}"
+                    SelectedItem="{Binding Language}"
+                    PickerShowMode="BottomSheet"
+                    ImageSource="language"
+                    Text="Language" />
+                <dx:FormSwitchItem
+                    Style="{StaticResource FormComponent}"
+                    ImageSource="theme"
+                    IsToggled="{Binding DarkMode}"
+                    Margin="0,0,16,0"
+                    Text="Dark Mode" />
+
+                <dx:DXButton
+                    Content="Log Out"
+                    WidthRequest="160"
+                    Margin="16,24"
+                    Command="{Binding HandleActionCommand}"
+                    ButtonType="Outlined" />
+            </dx:DXStackLayout>
+        </Grid>
+    </dx:DXScrollView>
+</ContentPage>

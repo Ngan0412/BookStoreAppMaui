@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookStoreApp.Views.ItemEditing2Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    ios:Page.UseSafeArea="True"
+    HideSoftInputOnTapped="True"
+    xmlns:viewModels="clr-namespace:BookStoreApp.ViewModels;assembly=BookStoreApp"
+    xmlns:Model="clr-namespace:BookStoreApp.Model;assembly=BookStoreApp"
+    x:DataType="viewModels:ItemEditing2ViewModel"
+    BindingContext="{dx:Ioc Type={x:Type TypeName=viewModels:ItemEditing2ViewModel}}"
+    Title="Edit Book">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{AppThemeBinding Light=savechanges, Dark=savechanges}" Command="{Binding SaveItemClickCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style x:Key="HeaderText" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Roboto Medium" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{dx:ThemeColor Key=OnSurface}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <dx:DXScrollView>
+        <dx:DXStackLayout Margin="16,0" ItemSpacing="16">
+            <!-- Title -->
+            <Label Style="{StaticResource HeaderText}" Text="Title" />
+            <dx:TextEdit 
+                PlaceholderText="Title" 
+                Text="{Binding BookItem.Title}" />
+
+            <Label Style="{StaticResource HeaderText}" Text="ISBN" />
+
+            <dx:TextEdit 
+                PlaceholderText="ISBN" 
+                Text="{Binding BookItem.Isbn}" />
+
+            <Label Style="{StaticResource HeaderText}" Text="Year of Publication" />
+            <dx:TextEdit 
+                PlaceholderText="Year of Publication" 
+                Text="{Binding BookItem.YearOfPublication}" 
+                Keyboard="Numeric" />
+
+            <Label Style="{StaticResource HeaderText}" Text="Quantity" />
+            <dx:TextEdit 
+                PlaceholderText="Quantity" 
+                Text="{Binding BookItem.Quantity}" 
+                Keyboard="Numeric" />
+
+            <Label Style="{StaticResource HeaderText}" Text="Price (Vnd)" />
+            <dx:TextEdit 
+                PlaceholderText="Price (Vnd)" 
+                Text="{Binding BookItem.Price}" 
+                Keyboard="Numeric" />
+            <Label Style="{StaticResource HeaderText}" Text="Publisher" />
+            <dx:ComboBoxEdit 
+                LabelText="Publisher" 
+                ItemsSource="{Binding Publishers}" 
+                SelectedValue="{Binding BookItem.publisherId}" 
+                DisplayMember="Name"
+                ValueMember="id"/>
+            <Label Style="{StaticResource HeaderText}" Text="Category" />
+            <dx:ComboBoxEdit 
+                LabelText="Category" 
+                ItemsSource="{Binding Categories}" 
+                SelectedValue="{Binding BookItem.categoryId}" 
+                DisplayMember="Name"
+                ValueMember="Id"/>
+            <Label Style="{StaticResource HeaderText}" Text="Author" />
+            <dx:ComboBoxEdit 
+                LabelText="Author" 
+                ItemsSource="{Binding Authors}" 
+                SelectedValue="{Binding BookItem.authorId}" 
+                DisplayMember="Name"
+                ValueMember="id"/>
+
+            <Label Style="{StaticResource HeaderText}" Text="Image URL" />
+            <dx:TextEdit 
+                PlaceholderText="Image URL" 
+                Text="{Binding BookItem.Image}" />
+
+            <dx:DXButton
+                Content="Save"
+                Command="{Binding SaveItemClickCommand}"
+                ButtonType="Accent"
+                Margin="0,8" />
+        </dx:DXStackLayout>
+    </dx:DXScrollView>
+</ContentPage>

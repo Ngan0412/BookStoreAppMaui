@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookStoreApp.Views.DetailForm4Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:viewModels="clr-namespace:BookStoreApp.ViewModels;assembly=BookStoreApp"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    ios:Page.UseSafeArea="True"
+    xmlns:Model="clr-namespace:BookStoreApp.Model;assembly=BookStoreApp"
+    x:DataType="viewModels:DetailForm4ViewModel"
+    BindingContext="{dx:Ioc Type={x:Type TypeName=viewModels:DetailForm4ViewModel}}"
+    Title="Book Detail">
+
+    <ContentPage.Resources>
+        <Style x:Key="FormComponent" TargetType="dx:FormItem">
+            <Setter Property="Padding" Value="0,16" />
+            <Setter Property="ArrowMargin" Value="16,0" />
+            <Setter Property="ShowSeparator" Value="False" />
+            <Setter Property="ImageWidth" Value="24" />
+            <Setter Property="ImageHeight" Value="24" />
+            <Setter Property="ImageMargin" Value="16,0" />
+            <Setter Property="ImageColor" Value="{dx:ThemeColor Key=OnSurfaceVariant}" />
+            <Setter Property="ArrowMargin" Value="16,0" />
+            <Setter Property="HorizontalSpacing" Value="0" />
+            <Setter Property="VerticalSpacing" Value="10" />
+            <Setter Property="TextFontSize" Value="16" />
+            <Setter Property="TextFontFamily" Value="Roboto" />
+            <Setter Property="DetailFontSize" Value="14" />
+            <Setter Property="DetailFontFamily" Value="Roboto" />
+            <Setter Property="DetailColor" Value="{dx:ThemeColor Key=OnSurfaceVariant}" />
+            <Setter Property="UseRippleEffect" Value="False" />
+        </Style>
+    </ContentPage.Resources>
+
+    <dx:DXScrollView>
+        <dx:DXStackLayout>
+            <Label
+                Text="{Binding BookItem.Title}"
+                FontSize="16"
+                FontFamily="Roboto"
+                FontAttributes="Bold"
+                TextColor="{dx:ThemeColor Key=OnSurface}"
+                Margin="16,0" />
+            <dx:DXStackLayout
+                  Orientation="Horizontal"
+                HorizontalOptions="End">
+                <Label
+                    Text="{Binding BookItem.Price}"
+                    FontSize="16"
+                    FontFamily="Roboto Medium"
+                    TextColor="{dx:ThemeColor Key=OnSurface}"
+                    Margin="16,8,5,0" />
+                <Label
+                    Text="Vnd"
+                    FontSize="16"
+                    FontFamily="Roboto Medium"
+                    TextColor="{dx:ThemeColor Key=OnSurface}"
+                    Margin="0,8,5,0" />
+            </dx:DXStackLayout>
+            
+
+            <dx:DXImage
+                Source="{Binding BookItem.Image}"
+                HeightRequest="196"
+                Margin="0,16,0,0"
+                Aspect="AspectFill" />
+
+            <Grid
+                Margin="16"
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto,Auto">
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="0,8"
+                    Spacing="4">
+
+                    <Label
+                        Text="Year of Publication"
+                        FontSize="12"
+                        TextColor="{dx:ThemeColor Key=OnSurfaceVariant}" />
+
+                    <Label
+                        Text="{Binding BookItem.YearOfPublication}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{dx:ThemeColor Key=OnSurface}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="0,8"
+                    Spacing="4">
+
+                    <Label
+                        Text="Publisher Name"
+                        FontSize="12"
+                        TextColor="{dx:ThemeColor Key=OnSurfaceVariant}" />
+
+                    <Label
+                        Text="{Binding BookItem.publisherName}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{dx:ThemeColor Key=OnSurface}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Padding="0,8"
+                    Spacing="4">
+
+                    <Label
+                        Text="Author Name"
+                        FontSize="12"
+                        TextColor="{dx:ThemeColor Key=OnSurfaceVariant}" />
+
+                    <Label
+                        Text="{Binding BookItem.authorName}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{dx:ThemeColor Key=OnSurface}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="0,8"
+                    Spacing="4">
+                    <Label
+                        Text="Category Name"
+                        FontSize="12"
+                        TextColor="{dx:ThemeColor Key=OnSurfaceVariant}" />
+                    <Label
+                        Text="{Binding BookItem.categoryName}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{dx:ThemeColor Key=OnSurface}" />
+                </VerticalStackLayout>
+            </Grid>
+        </dx:DXStackLayout>
+    </dx:DXScrollView>
+</ContentPage>

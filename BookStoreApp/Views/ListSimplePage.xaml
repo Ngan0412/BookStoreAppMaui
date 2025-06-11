@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookStoreApp.Views.ListSimplePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:BookStoreApp.ViewModels;assembly=BookStoreApp"
+    xmlns:Model="clr-namespace:BookStoreApp.Model;assembly=BookStoreApp"
+    x:DataType="viewModels:ListSimpleViewModel"
+    BindingContext="{dx:Ioc Type={x:Type TypeName=viewModels:ListSimpleViewModel}}"
+    Title="List Book">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{AppThemeBinding Light=add, Dark=add}" Command="{Binding AddItemClickCommand}" />
+    </ContentPage.ToolbarItems>
+    <dx:DXCollectionView
+        UseRippleEffect="True"
+        ItemsSource="{Binding Items}"
+        TapCommand="{Binding HandleActionCommand}">
+        <dx:DXCollectionView.ItemTemplate>
+            <DataTemplate x:DataType="Model:Book">
+                <Grid
+                    Margin="16,8"
+                    RowDefinitions="Auto,Auto"
+                    ColumnDefinitions="*,Auto"
+                    VerticalOptions="Center">
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding Title}"
+                        TextColor="{dx:ThemeColor Key=OnSurface}"
+                        FontSize="16"
+                        FontFamily="Roboto"
+                        VerticalOptions="Center" />
+
+                    <dx:DXStackLayout
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        ItemSpacing="8"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Margin="10,0,0,0">
+                        <dx:DXButton
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            ButtonType="Outlined"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ListSimpleViewModel}}, Path=EditCommand}"
+                            CommandParameter="{Binding .}">
+                            <dx:DXButton.ContentTemplate>
+                                <DataTemplate>
+                                    <dx:DXImage Source="edit.png" WidthRequest="24" HeightRequest="24" Margin="0,0,10,0"/>
+                                </DataTemplate>
+                            </dx:DXButton.ContentTemplate>
+                        </dx:DXButton>
+
+                        <dx:DXButton
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            ButtonType="Outlined"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ListSimpleViewModel}}, Path=DeleteCommand}"
+                            CommandParameter="{Binding .}">
+                            <dx:DXButton.ContentTemplate>
+                                <DataTemplate>
+                                    <dx:DXImage Source="delete.png" WidthRequest="24" HeightRequest="24" Margin="0,0,10,0"/>
+                                </DataTemplate>
+                            </dx:DXButton.ContentTemplate>
+                        </dx:DXButton>
+                    </dx:DXStackLayout>
+
+                    <dx:DXStackLayout
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        VerticalOptions="Center"
+                        ItemSpacing="4">    
+                        <Label
+                            Text="Số lượng:"
+                            TextColor="{dx:ThemeColor Key=OnSurfaceVariant}"
+                            FontSize="14"
+                            FontFamily="Roboto" />
+                        <Label
+                    Text="{Binding Quantity}"
+                    TextColor="{dx:ThemeColor Key=OnSurfaceVariant}"
+                    FontSize="14"
+                    FontFamily="Roboto" />
+                    </dx:DXStackLayout>
+                </Grid>
+            </DataTemplate>
+        </dx:DXCollectionView.ItemTemplate>
+    </dx:DXCollectionView>
+</ContentPage>
